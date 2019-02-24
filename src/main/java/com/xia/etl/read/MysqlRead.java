@@ -28,7 +28,8 @@ public class MysqlRead extends AbstractRead {
         String tableName = getTableName();
         DataBaseEntity dataBaseEntity = getDataBaseEntity();
 
-        SpringJdbcUntil jdbcUntil = DataSourcePools.getSpringJdbcUntil("", getDataBaseEntity());
+        SpringJdbcUntil jdbcUntil = DataSourcePools.getSpringJdbcUntil(String.format("%s(read)", tableName),
+                getDataBaseEntity());
 
         String pageSql = String.format("select * from %s where 1 = 1 limit %d offset %d ",
                 tableName, page.getPageNumber(), (page.getCurrentPage() - 1)*page.getPageNumber());

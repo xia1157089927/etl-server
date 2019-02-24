@@ -30,7 +30,8 @@ public class PostgresWrite extends AbstractWrite {
     public Map<String, Object> writeData(List<Map<String, Object>> datas) throws Exception {
         String tableName = getTableName();
         DataBaseEntity dataBaseEntity = getDataBaseEntity();
-        SpringJdbcUntil jdbcUntil = DataSourcePools.getSpringJdbcUntil("", getDataBaseEntity());
+        SpringJdbcUntil jdbcUntil = DataSourcePools.getSpringJdbcUntil(String.format("%s(write)", tableName),
+                getDataBaseEntity());
 
         String columns_sql = "SELECT " +
                 "	A .attnum, " +
